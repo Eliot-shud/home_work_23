@@ -1,6 +1,5 @@
 from typing import Optional
 from functions import filter_query, limit_query, map_query, sort_query, unique_query
-from typing import Iterable
 
 CMD_TO_FUNCTIONS = {
     'filter': filter_query,
@@ -17,13 +16,13 @@ def read_file(file_name):
             yield line
 
 
-def build_query(cmd, value, file_name, data: Optional[Iterable[str]]):
-
+def build_query(cmd: str, value: str, file_name: str, data: Optional[list[str]]):
     if data is None:
-        new_data = read_file(file_name)
+        prepared_data = read_file(file_name)
     else:
-        new_data = data
-    return list(CMD_TO_FUNCTIONS[cmd](value=value, data=new_data))
+        prepared_data = data
+
+    return list(CMD_TO_FUNCTIONS[cmd](value=value, data=prepared_data))
 
 
 def get_resault(cmd, value, file_name, data):

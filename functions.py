@@ -22,4 +22,3 @@ def map_query(value, data):
 def sort_query(value, data):
     reverse = value == 'desc'
     return sorted(data, reverse=reverse)
-
